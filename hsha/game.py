@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request, render_template, redirect, g
-import json
 import random
 from hsha import db
 
@@ -34,7 +33,6 @@ def char_switch_or_not(word):
     Returns the modified word.
     '''
     if random.choice([True, False]):
-        print("SwTCHED")
         if 'j' in word:
             word = word.replace('j', 'ly')
         else:
@@ -72,7 +70,6 @@ def get_some_random(numb):
 def validate():
     score = 0
     request_json = request.get_json(force=True)
-    print('request_json:',request_json)
     words = request_json['words']
     is_checked = request_json['is_checked']
     if not len(words) == len(is_checked):

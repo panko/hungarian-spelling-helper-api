@@ -12,3 +12,10 @@
 #score {
 	display: none;
 }
+
+a {text-decoration: none;}
+a:link { color: black; }
+a:visited { color: black; }
+a:hover { background: black; color: white; }
+a:active, 
+a:focus { background: green; color: white; }

@@ -22,3 +22,8 @@ So, lets create a RESTFUL API for helping the students to learn where to use "J"
 - [ ] Quality of code: naming, clarity, adherence to Clean Coding
 - [ ] Correctness (Hopefully reviewing the tests will suffice)
 - [ ] Ease of deployment: we would like to see it running in our private environment and deploy it with no fuss
+## docker
+- docker build -t hsha .
+- docker run --name hsha -d --rm -p 5000:5000 hsha
+or without
+- FLASK_APP=hsha FLASK_ENV=development flask run

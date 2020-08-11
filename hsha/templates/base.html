@@ -3,22 +3,17 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <script type="text/javascript" src="{{ url_for('static', filename='hsha.js') }}"></script>
 <div class="bordered center half">
+<center><h1>Hungarian spelling helper</h1></center>
 <nav class="center">
-  <center><h1><a href="{{ url_for('login.index') }}">Hungarian spelling helper</a></h1></center>
-  <ul>
+  <a href="{{ url_for('login.index') }}">Home</a>
+  <a href="{{ url_for('login.index') }}">Wordmanager</a>
     {% if username %}
-        <form action = "/logout" method = "POST">
-          {{ username }} - <input type = 'submit' value = 'Logout'/>
-          {{ g.user['score'] }}
-        </form>
+        <form style="display: inline; float:right;" action = "/logout" method = "POST">
+          {{ username }} - score: {{ g.user['score'] }} - <input type = 'submit' value = 'Logout'/>
+        </form> 
     {% endif %}
-  </ul>
 </nav>
 <section class="content center">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-
   {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
   {% endfor %}
