@@ -7,4 +7,5 @@ WORKDIR /hspa
 RUN pip install -r requirements.txt
 EXPOSE 5000
 COPY . .
+RUN flask init-db
 CMD ["flask", "run"]
