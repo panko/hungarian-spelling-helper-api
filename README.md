@@ -14,7 +14,7 @@ So, lets create a RESTFUL API for helping the students to learn where to use "J"
 - [X] Show round result at the end
 - [X] Simple GUI
 ## Optional features
-- [X] Expand predefined wordlist
+- [ ] Expand predefined wordlist
 - [ ] Ask the wrong answers again until we send back the number of the failures
 ## What will be checked
 - [ ] Existence and quality of tests
@@ -24,6 +24,6 @@ So, lets create a RESTFUL API for helping the students to learn where to use "J"
 - [ ] Ease of deployment: we would like to see it running in our private environment and deploy it with no fuss
 ## docker
 - docker build -t hsha .
-- docker run --name hsha -d --rm -p 5000:5000 hsha
-or without
+- docker run --name hsha -d --rm -p 5000:5000 hsha  
+or without  
 - FLASK_APP=hsha FLASK_ENV=development flask run
