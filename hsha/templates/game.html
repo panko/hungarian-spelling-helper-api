@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div id="game">
+<h2>Check in the correct boxes!</h2>
+
+<p>correct tick + 1 point, wrong tick - 1 point</p>
+<form >
+    {% for word in words %}
+
+    <input type="checkbox" id="{{ loop.index }}" name='checks' value="{{ word }}">
+    <label for="{{ word }}">{{ word }}</label><br>
+    {% endfor %}
+</form>
+<p><button onclick="send_gamedata_validate()">Send</button></p>
+</div>
+<div id="score">
+    Score: <span id="scorevalue"></span>
+    <p><form action="/">
+        <input type="submit" value="Another game" />
+        </form>
+    </p>
+</div>
+
+    
+
+{% endblock %}

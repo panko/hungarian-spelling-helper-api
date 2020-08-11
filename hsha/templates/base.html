@@ -1,0 +1,27 @@
+<!doctype html>
+<title>Hungarian spelling helper</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='hsha.js') }}"></script>
+<div class="bordered center half">
+<nav class="center">
+  <center><h1><a href="{{ url_for('login.index') }}">Hungarian spelling helper</a></h1></center>
+  <ul>
+    {% if username %}
+        <form action = "/logout" method = "POST">
+          {{ username }} - <input type = 'submit' value = 'Logout'/>
+          {{ g.user['score'] }}
+        </form>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content center">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  <center>{% block content %}{% endblock %}</center>
+</section>
+</div>
