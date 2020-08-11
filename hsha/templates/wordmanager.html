@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% for word in words %}
+<span style="text-align: left;" id="{{ word }}">{{ word }} <button onclick="delete_word_from_wordlist({{ word }})">Delete</button></span><br>
+{% endfor %}
+
+    
+
+{% endblock %}

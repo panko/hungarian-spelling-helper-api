@@ -6,7 +6,7 @@
 <center><h1>Hungarian spelling helper</h1></center>
 <nav class="center">
   <a href="{{ url_for('login.index') }}">Home</a>
-  <a href="{{ url_for('login.index') }}">Wordmanager</a>
+  <a href="{{ url_for('wordmanager.index') }}">Wordmanager</a>
     {% if username %}
         <form style="display: inline; float:right;" action = "/logout" method = "POST">
           {{ username }} - score: {{ g.user['score'] }} - <input type = 'submit' value = 'Logout'/>

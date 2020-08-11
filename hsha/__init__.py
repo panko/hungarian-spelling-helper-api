@@ -36,10 +36,11 @@ def create_app(test_config=None):
     db.init_app(app)
 
     # apply the blueprints to the app
-    from hsha import login, game
+    from hsha import login, game, wordmanager
 
     app.register_blueprint(login.bp)
     app.register_blueprint(game.bp)
+    app.register_blueprint(wordmanager.bp)
 
     # make url_for('index') == url_for('blog.index')
     # in another app, you might define a separate main index here with

@@ -64,3 +64,16 @@ function show_score(score) {
 	s.style.display = "block";
 	sv.innerHTML = score;
 }
+
+
+function put_word_to_wordlist(word){
+	return fetch('/wordmanager/' + word, {
+        method: 'PUT'
+    }).then(response => response.json())
+}
+
+function delete_word_from_wordlist(word) {
+    return fetch('/wordmanager/' + word.id, {
+        method: 'DELETE'
+    }).then(response => response.json())
+}

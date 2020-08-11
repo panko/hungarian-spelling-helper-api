@@ -25,5 +25,5 @@ So, lets create a RESTFUL API for helping the students to learn where to use "J"
 ## docker
 - docker build -t hsha .
 - docker run --name hsha -d --rm -p 5000:5000 hsha  
-or without  
+or without
 - FLASK_APP=hsha FLASK_ENV=development flask run
