@@ -44,7 +44,6 @@ function send_gamedata_validate()
 
 	postData('/game/validate', { "words":words, "is_checked":is_checked })
   	.then(data => {
-  		console.log(data);
     show_score(data);
     hide_game(); // JSON data parsed by `data.json()` call
   });

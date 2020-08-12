@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, render_template, redirect, g
+from flask import Blueprint, jsonify, request, render_template, redirect, g, abort
 import random
 from hsha import db
 from hsha.login import modify_user_score
@@ -24,7 +24,11 @@ def get_some_words(numb):
     '''
     data = db.query_db("select word from word")
     data = [v[0] for v in data]
-    return jsonify(random.sample(data, k=numb))
+    try:
+        words = random.sample(data, k=numb)
+    except ValueError:
+        return abort(404)
+    return jsonify(words)
 
 
 def char_switch_or_not(word):
@@ -53,15 +57,18 @@ def get_one_random():
     return jsonify(word)
 
 
-@bp.route('/random/<int:numb>')
-def get_some_random(numb):
+@bp.route('/randoms/<int:numb>')
+def get_some_randoms(numb):
     '''
     Returns 'numb' number of words modificated or not,
     the chances to get a word with the correct character are 50-50.
     numb - number of the retuned words
     '''
     data = db.query_db("select word, is_j from word")
-    words = random.sample([v[0] for v in data], k=numb)
+    try:
+        words = random.sample([v[0] for v in data], k=numb)
+    except ValueError:
+        return abort(404)
     for i, word in enumerate(words):
         words[i] = char_switch_or_not(word)
     return jsonify(words)
@@ -74,7 +81,7 @@ def validate():
     words = request_json['words']
     is_checked = request_json['is_checked']
     if not len(words) == len(is_checked):
-        return jsonify(-1)
+        return abort(400)
     valid_words = [v[0] for v in db.query_db("select word from word")]
 
     for i, word in enumerate(words):
@@ -96,5 +103,5 @@ def game_webpage():
     if request.method == 'GET':
         return redirect("/")
     rounds_count = int(request.form['rounds_count'])
-    words = get_some_random(rounds_count).get_json()
+    words = get_some_randoms(rounds_count).get_json()
     return render_template('game.html', words=words)

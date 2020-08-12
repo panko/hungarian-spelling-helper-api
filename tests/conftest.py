@@ -40,6 +40,15 @@ def runner(app):
     return app.test_cli_runner()
 
 
+@pytest.fixture
+def db_words(app):
+    """A test runner for the app's Click commands."""
+    with app.app_context():
+        db = get_db()
+        words = [w[0] for w in db.execute("select word from word").fetchall()]
+    return words
+
+
 class AuthActions:
     def __init__(self, client):
         self._client = client
