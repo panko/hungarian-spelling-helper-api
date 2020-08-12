@@ -62,9 +62,14 @@ def init_words_into_db():
     with open("tools/words.json") as jsonfile:
         data = json.load(jsonfile)
         for word in data['j']:
+            word = word.split(" ")[0]
             db.execute("INSERT INTO word (word, is_j) VALUES ('{}',true)".format(word))
         for word in data['ly']:
-            db.execute("INSERT INTO word (word, is_j) VALUES ('{}',false)".format(word))
+            word = word.split(" ")[0]
+            try:
+                db.execute("INSERT INTO word (word, is_j) VALUES ('{}',false)".format(word))
+            except sqlite3.IntegrityError:
+                print("the word '{}' is already in the database. has both characters.".format(word) )
         db.commit()
 
 @click.command("init-db")
