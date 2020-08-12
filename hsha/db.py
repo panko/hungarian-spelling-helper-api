@@ -20,6 +20,7 @@ def get_db():
 
     return g.db
 
+
 def query_db(query, args=(), one=False):
     cur = get_db().execute(query, args)
     rv = cur.fetchall()
@@ -36,17 +37,6 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-def modify_user_score(username, amount):
-    user = query_db("select score from user where username=?", [username], True)
-    cur = get_db().execute("UPDATE user set score=? where username=?", (amount + user['score'], username))
-    res = get_db().commit()
-    cur.close()
-    return res
-
-def create_user(username):
-    get_db().execute("INSERT INTO user (username) values (?)", (username,)).close()
-    get_db().commit()
-
 
 def init_db():
     """Clear existing data and create new tables."""
@@ -55,22 +45,29 @@ def init_db():
     with current_app.open_resource("schema.sql") as f:
         db.executescript(f.read().decode("utf8"))
 
+def format_word(word):
+    res = word.split(" ")[0]
+    res = res.lower()
+    return res
+
+
 def init_words_into_db():
     """Read in the words and create the data."""
     db = get_db()
 
     with open("tools/words.json") as jsonfile:
         data = json.load(jsonfile)
-        for word in data['j']:
-            word = word.split(" ")[0]
-            db.execute("INSERT INTO word (word, is_j) VALUES ('{}',true)".format(word))
-        for word in data['ly']:
-            word = word.split(" ")[0]
-            try:
+        try:
+            for word in data['j']:
+                word = format_word(word)
+                db.execute("INSERT INTO word (word, is_j) VALUES ('{}',true)".format(word))
+            for word in data['ly']:
+                word = format_word(word)
                 db.execute("INSERT INTO word (word, is_j) VALUES ('{}',false)".format(word))
-            except sqlite3.IntegrityError:
-                print("the word '{}' is already in the database. has both characters.".format(word) )
+        except sqlite3.IntegrityError:
+            print("the word '{}' is already in the database. has both characters.".format(word))
         db.commit()
+
 
 @click.command("init-db")
 @with_appcontext

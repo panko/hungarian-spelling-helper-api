@@ -20,6 +20,7 @@ def put(word):
     """
     This PUT method can be used to add words to the database.
     """
+    word = format_word(word)
     is_j = has_j(word)
     if is_j is None:
         return make_response(jsonify("this word has no j or ly"), 404)
@@ -35,6 +36,12 @@ def delete(word):
     """
     delete_from_db(word)
     return jsonify(success=True)
+
+
+def format_word(word):
+    res = word.split(" ")[0]
+    res = res.lower()
+    return res
 
 
 def delete_from_db(word):

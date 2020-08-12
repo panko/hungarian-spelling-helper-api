@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, render_template, redirect, g
 import random
 from hsha import db
+from hsha.login import modify_user_score
 
 bp = Blueprint("game", __name__, url_prefix="/game")
 
@@ -86,7 +87,7 @@ def validate():
             else:
                 score = score + 1
     if g.user:
-        db.modify_user_score(g.user['username'], score)
+        modify_user_score(g.user['username'], score)
     return jsonify(score)
 
 

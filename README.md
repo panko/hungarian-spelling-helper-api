@@ -22,8 +22,23 @@ So, lets create a RESTFUL API for helping the students to learn where to use "J"
 - [ ] Quality of code: naming, clarity, adherence to Clean Coding
 - [ ] Correctness (Hopefully reviewing the tests will suffice)
 - [X] Ease of deployment: we would like to see it running in our private environment and deploy it with no fuss
-## docker
+## deployment - docker
 - docker build -t hsha .
 - docker run --name hsha -d --rm -p 5000:5000 hsha  
 or without
 - FLASK_APP=hsha FLASK_ENV=development flask run
+## api docs
+### /game
+- GET /game/sample
+Returns the words from the database, all of them in json.
+- GET /game/sample/<integer\>
+Returns the specified number of words from the database in json. 
+- GET /game/random
+Returns one word from the db randomly, with or without the correct spelling.
+- GET /game/random/<integer\>
+Returns the specified number of words from the db randomly, each with or without the correct spelling.
+- POST /game/validate
+It's used to get our score from the sent data.
+example: {words:['ajak', 'zsindely', 'lyó'],checks:[true,true,false]} returns correct 3.
+If we have sent our cookie with our username as well, our score gets added to the db.
+### /wordmanager
