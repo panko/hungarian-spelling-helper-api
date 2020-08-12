@@ -69,11 +69,18 @@ function show_score(score) {
 function put_word_to_wordlist(word){
 	return fetch('/wordmanager/' + word, {
         method: 'PUT'
-    }).then(response => response.json())
+    }).then(location.reload(true))
+    
+}
+function hide_word(word){
+	document.getElementById(word).style.display = "none";
+	document.getElementById(word+"Btn").style.display = "none";
 }
 
 function delete_word_from_wordlist(word) {
     return fetch('/wordmanager/' + word.id, {
         method: 'DELETE'
-    }).then(response => response.json())
+    }).then(hide_word(word.id))
+    .then(location.reload(true))
+    
 }

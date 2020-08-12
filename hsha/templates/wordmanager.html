@@ -2,8 +2,9 @@
 
 
 {% block content %}
+<p><input type="text" id="put" name="put"><button onclick="put_word_to_wordlist(put.value)">New word</button></p>
 {% for word in words %}
-<span style="text-align: left;" id="{{ word }}">{{ word }} <button onclick="delete_word_from_wordlist({{ word }})">Delete</button></span><br>
+<span style="text-align: left;" id="{{ word }}">{{ word }} <button id="{{ word }}Btn" onclick="delete_word_from_wordlist({{ word }})">Delete</button></span><br>
 {% endfor %}
 
     
