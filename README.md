@@ -14,7 +14,7 @@ So, lets create a RESTFUL API for helping the students to learn where to use "J"
 - [X] Show round result at the end
 - [X] Simple GUI
 ## Optional features
-- [ ] Expand predefined wordlist
+- [X] Expand predefined wordlist
 - [ ] Ask the wrong answers again until we send back the number of the failures
 ## What will be checked
 - [ ] Existence and quality of tests
