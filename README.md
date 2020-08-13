@@ -44,5 +44,7 @@ It's used to get our score from the sent data.
 example: {"words":["hélya","borbéj","olaj","lyuhász","relyt"],"is_checked":[false,false,false,false,false]} returns correct 3  
 If we have sent our cookie with our username as well, our score gets added to the db.
 ### /wordmanager
-- PUT /wordmanager/<string\>
+- PUT /wordmanager/<string\>  
+We can add words to the db with this. If the word does not contain 'j' or 'ly' we should get back a 400 statuscode. If we want to add a word that is already in the db we should get back a successful 200. 
 - DELETE /wordmanager/<string\>
+We should be able to delete words from the db somehow, this endpoint is used for just that. If we want to delete a nonexistent word from the db, the expected behaviour is to get back a successful 200 statuscode. Thw idea is: if its not there, then there is no problem.  
