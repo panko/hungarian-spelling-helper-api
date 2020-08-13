@@ -31,16 +31,18 @@ or without
 - $ python3 -m pytest
 ## api docs
 ### /game
-- GET /game/sample
+- GET /game/sample  
 Returns the words from the database, all of them in json.
-- GET /game/sample/<integer\>
+- GET /game/sample/<integer\>  
 Returns the specified number of words from the database in json. 
-- GET /game/random
+- GET /game/random  
 Returns one word from the db randomly, with or without the correct spelling.
-- GET /game/randoms/<integer\>
+- GET /game/randoms/<integer\>  
 Returns the specified number of words from the db randomly, each with or without the correct spelling.
-- POST /game/validate
+- POST /game/validate  
 It's used to get our score from the sent data.
-example: {"words":["hélya","borbéj","olaj","lyuhász","relyt"],"is_checked":[false,false,false,false,false]} returns correct 3.
+example: {"words":["hélya","borbéj","olaj","lyuhász","relyt"],"is_checked":[false,false,false,false,false]} returns correct 3  
 If we have sent our cookie with our username as well, our score gets added to the db.
 ### /wordmanager
+- PUT /wordmanager/<string\>
+- DELETE /wordmanager/<string\>

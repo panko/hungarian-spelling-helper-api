@@ -83,11 +83,12 @@ def validate():
     if not len(words) == len(is_checked):
         return abort(400)
     valid_words = [v[0] for v in db.query_db("select word from word")]
-
     for i, word in enumerate(words):
         if is_checked[i]:
             if word in valid_words:
                 score = score + 1
+            else:
+                score = score - 1
         else:
             if word in valid_words:
                 score = score - 1

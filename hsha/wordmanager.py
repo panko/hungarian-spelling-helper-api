@@ -23,7 +23,7 @@ def put(word):
     word = format_word(word)
     is_j = has_j(word)
     if is_j is None:
-        return make_response(jsonify("this word has no j or ly"), 404)
+        return make_response(jsonify("this word has no j or ly"), 400)
     else:
         add_to_db(word, is_j=is_j)
         return jsonify(success=True)
